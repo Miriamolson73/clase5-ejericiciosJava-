@@ -7,6 +7,16 @@ function getProcessedData(url) {
         return processDataInWorker(v); // returns a promise
       });
   }
+//  con video
+  async function getProcessedData(url){
+    try{
+      const descaga=await downloadData(url);
+      const procesoDeDatos=await rocessDataInWorker();
+      return procesoDeDatos;
+    } catch(e) {
+      return downloadFallbackData(url) ;
+    }
+  }
 
   // segunda version
   async function getProcessedData(url) {
