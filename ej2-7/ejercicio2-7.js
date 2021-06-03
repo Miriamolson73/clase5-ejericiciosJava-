@@ -1,13 +1,37 @@
 function getProcessedData(url) {
-    return downloadData(url) // returns a promise
-      .catch(e => {
-        return downloadFallbackData(url)  // returns a promise
-      })
-      .then(v => {
-        return processDataInWorker(v); // returns a promise
-      });
+  return downloadData(url) // returns a promise
+    .catch(e => {
+      return downloadFallbackData(url)  // returns a promise
+    })
+    .then(v => {
+      return processDataInWorker(v); // returns a promise
+    });
+}
+
+async function getProcessedData(url) {
+  try{
+    const retorno= await downloadData(url) // returns a promise
+    .catch(e => {
+      return downloadFallbackData(url)  // returns a promise
+    })
+    .then(v => {
+      return processDataInWorker(v); // returns a promise
+    });
+    return retorno;
   }
-//  con video
+  catch(e){
+    console.log(e.message);
+  }
+}
+
+
+
+
+
+
+
+
+/* //  con video
   async function getProcessedData(url){
     try{
       const descaga=await downloadData(url);
@@ -15,6 +39,13 @@ function getProcessedData(url) {
       return procesoDeDatos;
     } catch(e) {
       return downloadFallbackData(url) ;
+    }
+  }
+  async function retornarError(url){
+    try{
+      const error= await downloadFallbackData(url);
+    }catch(e){
+      console.log(e.message)
     }
   }
 
@@ -51,4 +82,4 @@ async function getProcessedData(url) {
    
       
   } 
-}
+} */
